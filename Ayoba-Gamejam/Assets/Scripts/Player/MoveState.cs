@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveState : StateMachineBehaviour
 {
     public const string IDLE_STATE = "Idle";
-    public float m_playerSpeed = 2;
+    public float m_playerSpeed = 5;
 
 
     WidgetController m_widgetController;
