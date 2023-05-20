@@ -30,7 +30,7 @@ public class FireState : StateMachineBehaviour
 
         
 
-        //
+        
     }
 
     GameObject GetChildWithName(GameObject obj, string name)
@@ -60,16 +60,30 @@ public class FireState : StateMachineBehaviour
             {
                 m_canFire = false;
                 ShootingPos = GetChildWithName(animator.gameObject, "ShootingPoint").transform;
-               
-                
+
+
                 m_weaponComponent.FireWeapon(ShootingPos.position + Vector3.up, target);
             }
-            else animator.SetTrigger(MoveState.IDLE_STATE);
+            else { animator.SetTrigger(MoveState.IDLE_STATE);
+                animator.ResetTrigger(IdleState.FIRE_STATE);
+                //GameObject gun = GameObject.Find("Meat_Gun");
+                //gun.GetComponent<MeshRenderer>().enabled=true;
+                GameObject manager = GameObject.Find("Game Manager");
+                manager.GetComponent<GameManager>().Switch("base");
+
+            }
         }
 
         if (m_widgetController.GetDirection() != Vector3.zero)
         {
             animator.SetTrigger(IdleState.MOVE_STATE);
+            animator.ResetTrigger(IdleState.FIRE_STATE);
+            //GameObject gun = GameObject.Find("Meat_Gun");
+            //gun.GetComponent<MeshRenderer>().enabled = false;
+
+            GameObject manager = GameObject.Find("Game Manager");
+            manager.GetComponent<GameManager>().Switch("base");
+
         }
     }
 

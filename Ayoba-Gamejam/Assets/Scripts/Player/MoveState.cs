@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveState : StateMachineBehaviour
 {
     public const string IDLE_STATE = "Idle";
-    public float m_playerSpeed = 5;
+    public float m_playerSpeed = 20;
 
 
     WidgetController m_widgetController;
@@ -21,7 +21,13 @@ public class MoveState : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.ResetTrigger(IDLE_STATE);
-        if (m_widgetController.GetDirection() == Vector3.zero) { animator.SetTrigger(IDLE_STATE); }
+        if (m_widgetController.GetDirection() == Vector3.zero)
+        { animator.SetTrigger(IDLE_STATE);
+            //GameObject gun = GameObject.Find("Meat_Gun");
+            //gun.GetComponent<MeshRenderer>().enabled = true;
+            GameObject manager = GameObject.Find("Game Manager");
+            manager.GetComponent<GameManager>().Switch("base");
+        }
     }
 
     public override void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -34,4 +40,7 @@ public class MoveState : StateMachineBehaviour
         animator.transform.LookAt(lookatPos);
         animator.transform.position = animator.transform.position + (direction * m_playerSpeed * Time.deltaTime);
     }
+
+ 
+
 }
