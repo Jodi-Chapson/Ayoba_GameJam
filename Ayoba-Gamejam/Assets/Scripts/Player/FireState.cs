@@ -10,6 +10,8 @@ public class FireState : StateMachineBehaviour
     EnemyManager m_enemyManager;
     WeaponComponent m_weaponComponent;
 
+    private Transform ShootingPos;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (m_widgetController == null)
@@ -24,6 +26,25 @@ public class FireState : StateMachineBehaviour
 
         if (m_weaponComponent == null) { m_weaponComponent = animator.GetComponent<WeaponComponent>(); }
         m_canFire = true;
+
+
+        
+
+        //
+    }
+
+    GameObject GetChildWithName(GameObject obj, string name)
+    {
+        Transform trans = obj.transform;
+        Transform childTrans = trans.Find(name);
+        if (childTrans != null)
+        {
+            return childTrans.gameObject;
+        }
+        else
+        {
+            return null;
+        }
     }
 
 
@@ -38,7 +59,10 @@ public class FireState : StateMachineBehaviour
             if (m_canFire)
             {
                 m_canFire = false;
-                m_weaponComponent.FireWeapon(animator.transform.position + Vector3.up, target);
+                ShootingPos = GetChildWithName(animator.gameObject, "ShootingPoint").transform;
+               
+                
+                m_weaponComponent.FireWeapon(ShootingPos.position + Vector3.up, target);
             }
             else animator.SetTrigger(MoveState.IDLE_STATE);
         }
