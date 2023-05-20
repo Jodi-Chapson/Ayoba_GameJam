@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MoveState : StateMachineBehaviour
 {
@@ -39,7 +40,7 @@ public class MoveState : StateMachineBehaviour
 
         animator.transform.LookAt(lookatPos);
 
-
+        animator.gameObject.GetComponent<NavMeshAgent>().SetDestination(lookatPos);
         //m_navmeshAgent.SetDestination(manager.player.transform.position);
         //animator.transform.position = animator.transform.position + (direction * m_playerSpeed * Time.deltaTime);
     }
