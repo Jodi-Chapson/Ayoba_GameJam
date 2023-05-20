@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class UI: MonoBehaviour
 {
 
-  
+    public GameObject PauseMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -34,5 +34,21 @@ public class UI: MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        PauseMenu.SetActive(true);
+    }
+
+    public void Unpause()
+    {
+        Time.timeScale = 1;
+        PauseMenu.SetActive(false);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
     
 }
