@@ -36,11 +36,19 @@ public class ProjectileComponent : MonoBehaviour
         StartCoroutine(DisableObjectDelayed(5));
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            //Debug.Log("ow");
+
+        }
+        m_isActive = false;
+        gameObject.SetActive(false);
+
         //Delay 0.1 to allow the physics collision to happen
         StopAllCoroutines(); // Stop the 5 second trigger started earlier
-        StartCoroutine(DisableObjectDelayed(0.1f));
+        //StartCoroutine(DisableObjectDelayed(0.1f));
     }
 
 

@@ -8,11 +8,13 @@ using UnityEngine.AI;
 public class EnemyComponent : MonoBehaviour
 {
     // Start is called before the first frame update
+    public GameManager manager;
     NavMeshAgent m_navmeshAgent;
     Animator m_animator;
-    public int navmeshRange=5;
+    public int navmeshRange = 5;
     private void Start()
     {
+        manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         EnemyManager.GetInstance().RegisterEnemy(this);
         m_navmeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
@@ -21,10 +23,18 @@ public class EnemyComponent : MonoBehaviour
 
     private void Update()
     {
-        if (!m_navmeshAgent.hasPath)
+        float distance = (Vector3.Distance(this.transform.position, manager.player.transform.position));
+
+        if (distance < manager.detect_distance)
+        {
+            m_navmeshAgent.SetDestination(manager.player.transform.position);
+        }
+        else
         {
             m_navmeshAgent.SetDestination(RandomNavmeshLocation(navmeshRange));
         }
+        
+       
     }
     private void OnDestroy()
     {
@@ -46,4 +56,14 @@ public class EnemyComponent : MonoBehaviour
         }
         return finalPosition;
     }
+
+    public void Attack()
+    {
+        //this.GetComponent < WeaponComponent>().FireWeapon(this.gameObject.transform.position + Vector3.up, target);
+
+        //Vector3 direction = (_target - _startPosition).normalized;
+       // transform.Translate(m_direction * m_speed * Time.deltaTime);
+    }
+
+
 }

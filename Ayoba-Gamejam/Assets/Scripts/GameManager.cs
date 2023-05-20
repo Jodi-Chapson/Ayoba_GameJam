@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject gun;
+    public GameObject player;
+    public float detect_distance;
     public GameObject b_base;
     public GameObject b_shoot;
     public GameObject b_base_armature;
@@ -14,7 +15,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gun = GameObject.Find("Meat_Gun");
+       
     }
 
     public void Switch(string type)

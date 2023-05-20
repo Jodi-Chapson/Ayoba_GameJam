@@ -38,9 +38,12 @@ public class MoveState : StateMachineBehaviour
         lookatPos.y = animator.transform.position.y;
 
         animator.transform.LookAt(lookatPos);
-        animator.transform.position = animator.transform.position + (direction * m_playerSpeed * Time.deltaTime);
+
+
+        //m_navmeshAgent.SetDestination(manager.player.transform.position);
+        //animator.transform.position = animator.transform.position + (direction * m_playerSpeed * Time.deltaTime);
     }
 
- 
+
 
 }
