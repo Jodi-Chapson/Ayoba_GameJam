@@ -30,6 +30,9 @@ public class ProjectileComponent : MonoBehaviour
         m_isActive = true;
         m_direction = _direction;
         m_speed = _speed;
+        
+        
+        //look at changing this maybe
         StartCoroutine(DisableObjectDelayed(5));
     }
 
