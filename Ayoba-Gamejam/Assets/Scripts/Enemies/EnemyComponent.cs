@@ -10,6 +10,7 @@ public class EnemyComponent : MonoBehaviour
     // Start is called before the first frame update
     NavMeshAgent m_navmeshAgent;
     Animator m_animator;
+    public int navmeshRange=5;
     private void Start()
     {
         EnemyManager.GetInstance().RegisterEnemy(this);
@@ -22,7 +23,7 @@ public class EnemyComponent : MonoBehaviour
     {
         if (!m_navmeshAgent.hasPath)
         {
-            m_navmeshAgent.SetDestination(RandomNavmeshLocation(5));
+            m_navmeshAgent.SetDestination(RandomNavmeshLocation(navmeshRange));
         }
     }
     private void OnDestroy()
