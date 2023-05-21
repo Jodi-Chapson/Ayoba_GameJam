@@ -50,6 +50,8 @@ public class FireState : StateMachineBehaviour
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (Time.timeScale == 0) return;
+
         Vector3 target = m_enemyManager.GetNearestTarget(animator.transform.position);
         if (target != Vector3.zero)
         {

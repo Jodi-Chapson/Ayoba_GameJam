@@ -12,5 +12,7 @@ EditorBuildSettings:
     path: Assets/PrefabScene.unity
     guid: 1f285f2b52c168541864713d52c44185
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c9011393e0ab18c4e95f7a28efd3f264,
+      type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 772011345782f95428fb634ca80cb1af, type: 2}

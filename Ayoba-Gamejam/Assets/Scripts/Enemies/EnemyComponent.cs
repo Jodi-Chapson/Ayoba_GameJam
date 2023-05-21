@@ -36,11 +36,13 @@ public class EnemyComponent : MonoBehaviour
     {
         float distance = (Vector3.Distance(this.transform.position, manager.player.transform.position));
 
+        countup += 0.1f;
+
         if (distance < manager.detect_distance)
         {
             m_navmeshAgent.SetDestination(manager.player.transform.position);
 
-            countup += 0.1f;
+            
             if (countup > delayCD)
             {
                 Attack();
@@ -80,6 +82,8 @@ public class EnemyComponent : MonoBehaviour
 
     public void Attack()
     {
+        if (Time.timeScale == 0) {return; } 
+
         GameObject Projectile = Instantiate(prefab, shootpos.position + Vector3.up, Quaternion.identity);
 
         Vector3 direction = (manager.player.transform.position - shootpos.position).normalized;
