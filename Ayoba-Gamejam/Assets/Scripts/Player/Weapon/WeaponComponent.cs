@@ -13,6 +13,7 @@ public class WeaponComponent : MonoBehaviour
 
     public void FireWeapon(Vector3 startPos, Vector3 _target)
     {
+
         m_projectileSystem.FireProjectile(startPos, _target, m_projectileSpeed);
     }
 }
