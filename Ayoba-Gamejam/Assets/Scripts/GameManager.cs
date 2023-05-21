@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public GameObject end_panel;
     public bool canswitch;
 
+    public GameObject joystick_handle;
+    public GameObject joystick_ring;
+
     public GameObject winscreen;
 
 
