@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 0}
-  navmeshRange: 10
+  navmeshRange: 7
   prefab: {fileID: 6818625217166948135, guid: ebf4e8cf86383304db2339af4471a155, type: 3}
   shootpos: {fileID: 1229697442872109068}
   projectile_speed: 15

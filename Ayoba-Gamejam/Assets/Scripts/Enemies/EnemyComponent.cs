@@ -97,6 +97,14 @@ public class EnemyComponent : MonoBehaviour
 
     public void Death()
     {
+        GameManager manager = GameObject.Find("Game Manager").gameObject.GetComponent<GameManager>();
+        manager.Enemies --;
+
+
+        if (manager.Enemies == 0)
+        {
+            //open doors
+        }
         Destroy(this.gameObject);
     }
 
