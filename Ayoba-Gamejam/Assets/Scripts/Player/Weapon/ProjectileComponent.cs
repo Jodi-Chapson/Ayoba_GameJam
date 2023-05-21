@@ -40,15 +40,24 @@ public class ProjectileComponent : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            //Debug.Log("ow");
+            EnemyComponent enemy = collision.gameObject.GetComponent<EnemyComponent>();
+            enemy.health -= 1;
+
+
+            if (enemy.health <= 0)
+            {
+                enemy.Death();
+            }
+           
+         
 
         }
+
         m_isActive = false;
         gameObject.SetActive(false);
 
-        //Delay 0.1 to allow the physics collision to happen
-        StopAllCoroutines(); // Stop the 5 second trigger started earlier
-        //StartCoroutine(DisableObjectDelayed(0.1f));
+        
+        StopAllCoroutines(); 
     }
 
 

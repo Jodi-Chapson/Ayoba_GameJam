@@ -66,8 +66,8 @@ public class FireState : StateMachineBehaviour
             }
             else { animator.SetTrigger(MoveState.IDLE_STATE);
                 animator.ResetTrigger(IdleState.FIRE_STATE);
-                //GameObject gun = GameObject.Find("Meat_Gun");
-                //gun.GetComponent<MeshRenderer>().enabled=true;
+                
+
                 GameObject manager = GameObject.Find("Game Manager");
                 manager.GetComponent<GameManager>().Switch("base");
 
@@ -78,8 +78,8 @@ public class FireState : StateMachineBehaviour
         {
             animator.SetTrigger(IdleState.MOVE_STATE);
             animator.ResetTrigger(IdleState.FIRE_STATE);
-            //GameObject gun = GameObject.Find("Meat_Gun");
-            //gun.GetComponent<MeshRenderer>().enabled = false;
+            
+            
 
             GameObject manager = GameObject.Find("Game Manager");
             manager.GetComponent<GameManager>().Switch("base");

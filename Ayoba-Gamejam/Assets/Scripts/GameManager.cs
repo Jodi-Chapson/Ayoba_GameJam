@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject b_shoot;
     public GameObject b_base_armature;
     public GameObject b_shoot_armature;
+    public GameObject end_panel;
     public bool canswitch;
     
     // Start is called before the first frame update

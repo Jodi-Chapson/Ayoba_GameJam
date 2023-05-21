@@ -12,12 +12,23 @@ public class EnemyComponent : MonoBehaviour
     NavMeshAgent m_navmeshAgent;
     Animator m_animator;
     public int navmeshRange = 5;
+    public GameObject prefab;
+    public Transform shootpos;
+    public float projectile_speed;
+
+    public int health;
+
+    public float countup;
+    public float delayCD;
+
+
     private void Start()
     {
         manager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         EnemyManager.GetInstance().RegisterEnemy(this);
         m_navmeshAgent = GetComponent<NavMeshAgent>();
         m_animator = GetComponent<Animator>();
+        countup = 1 / 2 * delayCD;
     }
 
 
@@ -28,6 +39,16 @@ public class EnemyComponent : MonoBehaviour
         if (distance < manager.detect_distance)
         {
             m_navmeshAgent.SetDestination(manager.player.transform.position);
+
+            countup += 0.1f;
+            if (countup > delayCD)
+            {
+                Attack();
+                countup = 0;
+
+            }
+
+            
         }
         else
         {
@@ -59,10 +80,24 @@ public class EnemyComponent : MonoBehaviour
 
     public void Attack()
     {
-        //this.GetComponent < WeaponComponent>().FireWeapon(this.gameObject.transform.position + Vector3.up, target);
+        GameObject Projectile = Instantiate(prefab, shootpos.position + Vector3.up, Quaternion.identity);
 
-        //Vector3 direction = (_target - _startPosition).normalized;
-       // transform.Translate(m_direction * m_speed * Time.deltaTime);
+        Vector3 direction = (manager.player.transform.position - shootpos.position).normalized;
+
+        EnemyProjectile proj = Projectile.GetComponent<EnemyProjectile>();
+        proj.dir = direction;
+        proj.proj_speed = projectile_speed;
+        
+        
+        //Projectile.transform.Translate(direction * projectile_speed * Time.deltaTime);
+        
+       
+        
+    }
+
+    public void Death()
+    {
+        Destroy(this.gameObject);
     }
 
 
