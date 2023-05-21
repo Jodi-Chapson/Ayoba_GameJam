@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject end_panel;
     public bool canswitch;
 
+    public GameObject winscreen;
+
 
     public int Enemies = 3;
     
@@ -41,6 +43,11 @@ public class GameManager : MonoBehaviour
                 b_shoot_armature.gameObject.SetActive(true);
             }
         }
+    }
+
+    public void WinScene()
+    {
+        winscreen.SetActive(true);
     }
     
 }

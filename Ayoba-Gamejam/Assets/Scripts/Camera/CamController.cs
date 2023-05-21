@@ -21,6 +21,7 @@ public class CamController : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.Find("Player").transform;
         CamPos = transform.position;
         OriginPos = CamPos;
         CamFollow = true;
