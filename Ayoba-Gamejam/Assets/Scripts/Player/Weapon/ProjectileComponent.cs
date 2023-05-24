@@ -38,6 +38,11 @@ public class ProjectileComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        m_isActive = false;
+        gameObject.SetActive(false);
+
+
+        StopAllCoroutines();
         if (collision.gameObject.tag == "Enemy")
         {
             EnemyComponent enemy = collision.gameObject.GetComponent<EnemyComponent>();
@@ -48,16 +53,15 @@ public class ProjectileComponent : MonoBehaviour
             {
                 enemy.Death();
             }
-           
-         
+            Destroy(gameObject);
+
 
         }
+        else{
+           // Destroy(gameObject);
+ }
 
-        m_isActive = false;
-        gameObject.SetActive(false);
-
-        
-        StopAllCoroutines(); 
+       
     }
 
 
