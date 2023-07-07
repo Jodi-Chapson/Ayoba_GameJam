@@ -10,6 +10,8 @@ public class FireState : StateMachineBehaviour
     EnemyManager m_enemyManager;
     WeaponComponent m_weaponComponent;
 
+    private Transform ShootingPos;
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (m_widgetController == null)
@@ -24,11 +26,32 @@ public class FireState : StateMachineBehaviour
 
         if (m_weaponComponent == null) { m_weaponComponent = animator.GetComponent<WeaponComponent>(); }
         m_canFire = true;
+
+
+        
+
+        
+    }
+
+    GameObject GetChildWithName(GameObject obj, string name)
+    {
+        Transform trans = obj.transform;
+        Transform childTrans = trans.Find(name);
+        if (childTrans != null)
+        {
+            return childTrans.gameObject;
+        }
+        else
+        {
+            return null;
+        }
     }
 
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        if (Time.timeScale == 0) return;
+
         Vector3 target = m_enemyManager.GetNearestTarget(animator.transform.position);
         if (target != Vector3.zero)
         {
@@ -38,14 +61,31 @@ public class FireState : StateMachineBehaviour
             if (m_canFire)
             {
                 m_canFire = false;
-                m_weaponComponent.FireWeapon(animator.transform.position + Vector3.up, target);
+                ShootingPos = GetChildWithName(animator.gameObject, "ShootingPoint").transform;
+
+
+                m_weaponComponent.FireWeapon(ShootingPos.position + Vector3.up, target);
             }
-            else animator.SetTrigger(MoveState.IDLE_STATE);
+            else { animator.SetTrigger(MoveState.IDLE_STATE);
+                animator.ResetTrigger(IdleState.FIRE_STATE);
+                
+
+                GameObject manager = GameObject.Find("Game Manager");
+                manager.GetComponent<GameManager>().Switch("base");
+
+            }
         }
 
         if (m_widgetController.GetDirection() != Vector3.zero)
         {
             animator.SetTrigger(IdleState.MOVE_STATE);
+            animator.ResetTrigger(IdleState.FIRE_STATE);
+            
+            
+
+            GameObject manager = GameObject.Find("Game Manager");
+            manager.GetComponent<GameManager>().Switch("base");
+
         }
     }
 

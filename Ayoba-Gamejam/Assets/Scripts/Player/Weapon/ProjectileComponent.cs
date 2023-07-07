@@ -30,14 +30,38 @@ public class ProjectileComponent : MonoBehaviour
         m_isActive = true;
         m_direction = _direction;
         m_speed = _speed;
+        
+        
+        //look at changing this maybe
         StartCoroutine(DisableObjectDelayed(5));
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        //Delay 0.1 to allow the physics collision to happen
-        StopAllCoroutines(); // Stop the 5 second trigger started earlier
-        StartCoroutine(DisableObjectDelayed(0.1f));
+        m_isActive = false;
+        gameObject.SetActive(false);
+
+
+        StopAllCoroutines();
+        if (collision.gameObject.tag == "Enemy")
+        {
+            EnemyComponent enemy = collision.gameObject.GetComponent<EnemyComponent>();
+            enemy.health -= 1;
+
+
+            if (enemy.health <= 0)
+            {
+                enemy.Death();
+            }
+            Destroy(gameObject);
+
+
+        }
+        else{
+           // Destroy(gameObject);
+ }
+
+       
     }
 
 
